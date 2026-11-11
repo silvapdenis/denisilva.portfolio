@@ -27,6 +27,7 @@ export default async function handler(req, res) {
 
   const { RESEND_API_KEY, CONTACT_TO, CONTACT_FROM } = process.env;
   if (!RESEND_API_KEY || !CONTACT_TO) {
+    console.error('[contact] missing env vars', { RESEND_API_KEY: !!RESEND_API_KEY, CONTACT_TO: !!CONTACT_TO });
     return res.status(500).json({ error: 'Server not configured' });
   }
 
@@ -44,6 +45,9 @@ export default async function handler(req, res) {
     }),
   });
 
-  if (!r.ok) return res.status(502).json({ error: 'Email provider error' });
+  if (!r.ok) {
+    console.error('[contact] Resend error', r.status, await r.text());
+    return res.status(502).json({ error: 'Email provider error' });
+  }
   return res.status(200).json({ ok: true });
 }
