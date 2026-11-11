@@ -8,7 +8,7 @@ export const site = {
   whatsapp: 'https://wa.me/5512982709753',
   location: 'Taubaté, São Paulo',
   linkedin: 'https://www.linkedin.com/in/d%C3%AAnis-silva-6a847424/',
-  github: 'https://github.com/denispsilva',
+  github: 'https://github.com/silvapdenis',
 };
 
 // Chips do hero (a lista completa por categoria fica em src/i18n/*.ts → skills)

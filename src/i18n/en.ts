@@ -20,7 +20,7 @@ export const en = {
     titlePre: 'Well-built software, ',
     titleHl: 'without the complication.',
     intro:
-      "I'm a Full Stack developer, and for over 13 years I've helped companies bring projects to life — from online stores to cloud platforms. I work with PHP, Laravel and Vue.js, with attention to detail and honest conversation from start to finish.",
+      "I'm a Full Stack developer, and for over 13 years I've helped companies bring projects to life — from online stores to cloud platforms. I work with PHP, Laravel and Vue.js, with attention to detail and honest conversation from start to finish. And I use AI every day to deliver faster, without compromising quality.",
     secondary: 'What I do',
     years: 'years of<br />experience',
   },
@@ -69,11 +69,12 @@ export const en = {
     eyebrow: 'Technologies',
     title: 'My stack',
     groups: [
-      { name: 'Back-end', items: ['PHP', 'Laravel', 'Node.js', 'REST APIs', 'SQS'] },
+      { name: 'Back-end', items: ['PHP', 'Laravel', 'Java', 'Spring', 'Node.js', 'REST APIs', 'SQS'] },
       { name: 'Front-end', items: ['Vue.js', 'JavaScript', 'HTML5', 'CSS3', 'SASS', 'Angular'] },
       { name: 'Cloud & Infra', items: ['AWS', 'EC2', 'S3', 'Supervisor'] },
       { name: 'CMS & E-commerce', items: ['WordPress', 'WooCommerce', 'VTEX', 'Magento'] },
       { name: 'Database', items: ['MySQL', 'TOTVS ERP'] },
+      { name: 'AI', items: ['AI-assisted development', 'Claude Code'] },
     ],
     languagesTitle: 'Languages',
     languages: [
@@ -94,10 +95,11 @@ export const en = {
         period: 'Aug 2021 — Present',
         metrics: [],
         bullets: [
-          'Tech Lead on a proprietary SaaS platform for executive aviation — architecture and delivery of reservations, automated billing, crew, fleet and operations modules.',
+          'Tech Lead on a proprietary SaaS platform for executive aviation.',
           'Two-way integration with the TOTVS Protheus ERP, keeping critical business data in sync in real time.',
           'Automated billing for multiple contract models.',
           'Set up a formal QA process with a regression test suite, improving delivery stability.',
+          'AI in the team’s development workflow, supporting test generation and code review, speeding up delivery without compromising quality.',
           'AWS infrastructure with asynchronous SQS queues and background processes managed by Supervisor.',
         ],
         stack: ['PHP', 'Laravel', 'Vue.js', 'AWS', 'SQS', 'MySQL', 'TOTVS ERP'],
@@ -133,10 +135,10 @@ export const en = {
         period: 'Jan 2009 — Jan 2019',
         metrics: [],
         bullets: [
-          'Development of web systems and platforms for the Brazilian National Institute for Space Research, on projects of major scientific and social relevance.',
+          'Development of web systems and platforms in Java (Spring and JSP) for the Brazilian National Institute for Space Research, on projects of major scientific and social relevance.',
           'Created SOS-Chuva — an award-winning real-time weather observation system that combines satellites, radars and numerical simulations for citizens and Civil Defense.',
         ],
-        stack: ['PHP', 'WordPress', 'WooCommerce', 'VTEX', 'JavaScript'],
+        stack: ['Java', 'Spring', 'JSP', 'JavaScript', 'HTML', 'CSS'],
       },
     ],
     educationTitle: 'Education',

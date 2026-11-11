@@ -21,7 +21,7 @@ export const pt: Dict = {
     titlePre: 'Software bem feito, ',
     titleHl: 'sem complicação.',
     intro:
-      'Sou desenvolvedor Full Stack e há mais de 13 anos ajudo empresas a tirar projetos do papel — de lojas virtuais a plataformas na nuvem. Trabalho com PHP, Laravel e Vue.js, com atenção aos detalhes e conversa franca do começo ao fim.',
+      'Sou desenvolvedor Full Stack e há mais de 13 anos ajudo empresas a tirar projetos do papel — de lojas virtuais a plataformas na nuvem. Trabalho com PHP, Laravel e Vue.js, com atenção aos detalhes e conversa franca do começo ao fim. E uso IA no dia a dia para entregar mais rápido, sem abrir mão da qualidade.',
     secondary: 'O que eu faço',
     years: 'anos de<br />experiência',
   },
@@ -70,11 +70,12 @@ export const pt: Dict = {
     eyebrow: 'Tecnologias',
     title: 'Minha stack',
     groups: [
-      { name: 'Back-end', items: ['PHP', 'Laravel', 'Node.js', 'APIs REST', 'SQS'] },
+      { name: 'Back-end', items: ['PHP', 'Laravel', 'Java', 'Spring', 'Node.js', 'APIs REST', 'SQS'] },
       { name: 'Front-end', items: ['Vue.js', 'JavaScript', 'HTML5', 'CSS3', 'SASS', 'Angular'] },
       { name: 'Cloud e Infra', items: ['AWS', 'EC2', 'S3', 'Supervisor'] },
       { name: 'CMS e E-commerce', items: ['WordPress', 'WooCommerce', 'VTEX', 'Magento'] },
       { name: 'Banco de dados', items: ['MySQL', 'ERP TOTVS'] },
+      { name: 'IA', items: ['Desenvolvimento assistido por IA', 'Claude Code'] },
     ],
     languagesTitle: 'Idiomas',
     languages: [
@@ -95,10 +96,11 @@ export const pt: Dict = {
         period: 'Ago 2021 — Presente',
         metrics: [],
         bullets: [
-          'Tech Lead no desenvolvimento de plataforma SaaS proprietária para aviação executiva — arquitetura e entrega de módulos de reservas, faturamento automatizado, tripulação, frota e providências operacionais.',
+          'Tech Lead no desenvolvimento de plataforma SaaS proprietária para aviação executiva.',
           'Integração bidirecional com o ERP Protheus (TOTVS), garantindo sincronização de dados críticos de negócio em tempo real.',
           'Faturamento automatizado para múltiplos modelos contratuais.',
           'Processo formal de QA com suíte de testes regressivos, aumentando a estabilidade das entregas.',
+          'IA no fluxo de desenvolvimento do time, como apoio à geração de testes e à revisão de código, acelerando as entregas sem abrir mão da qualidade.',
           'Infraestrutura na AWS com filas assíncronas via SQS e processos em background controlados pelo Supervisor.',
         ],
         stack: ['PHP', 'Laravel', 'Vue.js', 'AWS', 'SQS', 'MySQL', 'ERP TOTVS'],
@@ -134,10 +136,10 @@ export const pt: Dict = {
         period: 'Jan 2009 — Jan 2019',
         metrics: [],
         bullets: [
-          'Desenvolvimento de sistemas e plataformas web para o Instituto Nacional de Pesquisas Espaciais, em projetos de grande relevância científica e social.',
+          'Desenvolvimento de sistemas e plataformas web em Java (Spring e JSP) para o Instituto Nacional de Pesquisas Espaciais, em projetos de grande relevância científica e social.',
           'Criação do SOS-Chuva — sistema premiado de observação meteorológica em tempo real, integrando satélites, radares e simulações numéricas para cidadãos e Defesa Civil.',
         ],
-        stack: ['PHP', 'WordPress', 'WooCommerce', 'VTEX', 'JavaScript'],
+        stack: ['Java', 'Spring', 'JSP', 'JavaScript', 'HTML', 'CSS'],
       },
     ],
     educationTitle: 'Formação',
