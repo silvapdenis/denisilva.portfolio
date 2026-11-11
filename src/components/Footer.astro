@@ -1,0 +1,65 @@
+---
+import { Icon } from 'astro-icon/components';
+import { site } from '../data/site';
+import type { Dict } from '../i18n/en';
+
+interface Props {
+  t: Dict;
+}
+const { t } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="ftr">
+  <div class="container ftr__in">
+    <p>© {year} {site.name}. {t.footer.rights}</p>
+
+    <div class="social">
+      <a href={site.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <Icon name="simple-icons:linkedin" size={18} />
+      </a>
+      <a href={site.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <Icon name="simple-icons:github" size={18} />
+      </a>
+      <a href="#top" class="up" aria-label={t.footer.top}>
+        <Icon name="lucide:arrow-up" size={18} />
+      </a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .ftr {
+    border-top: 1px solid var(--line);
+    padding-block: 36px;
+  }
+  .ftr__in {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .social {
+    display: flex;
+    gap: 10px;
+  }
+  .social a {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--line);
+    transition: background 0.3s, border-color 0.3s, transform 0.3s var(--ease);
+  }
+  .social a:hover {
+    background: var(--red);
+    border-color: var(--red);
+    transform: translateY(-3px);
+  }
+</style>

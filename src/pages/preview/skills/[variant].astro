@@ -1,0 +1,11 @@
+---
+// Comparação da seção de tecnologias: /preview/skills/{cards|marquee|tabs|list}
+import Page from '../../../components/Page.astro';
+
+export function getStaticPaths() {
+  return ['cards', 'marquee', 'tabs', 'list'].map((variant) => ({ params: { variant } }));
+}
+const { variant } = Astro.params;
+---
+
+<Page lang="pt" skills={variant as 'cards' | 'marquee' | 'tabs' | 'list'} preview />

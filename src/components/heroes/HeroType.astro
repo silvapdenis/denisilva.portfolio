@@ -1,0 +1,141 @@
+---
+// Variante: tipográfica, nome gigante em contorno + faixa rolando
+import { Icon } from 'astro-icon/components';
+import { site, stack } from '../../data/site';
+import type { Dict } from '../../i18n/en';
+
+interface Props {
+  t: Dict;
+}
+const { t } = Astro.props;
+const words = [...stack, ...stack];
+---
+
+<section class="hx-hero type" id="home">
+  <div class="hx-grid" aria-hidden="true"></div>
+  <div class="ghost" aria-hidden="true">Denis<br />Silva</div>
+
+  <div class="container body">
+    <div class="copy">
+      <p class="eyebrow reveal">{t.hero.eyebrow}</p>
+      <h1 class="hx-title reveal" style="--d: 0.08s">{t.hero.titlePre}<span class="hx-hl">{t.hero.titleHl}</span></h1>
+      <p class="hx-text reveal" style="--d: 0.16s">{t.hero.intro}</p>
+      <div class="hx-cta reveal" style="--d: 0.24s">
+        <a href="#contact" class="btn btn--red">{t.cta} <Icon name="lucide:arrow-up-right" size={16} /></a>
+        <a href="#services" class="btn">{t.hero.secondary}</a>
+      </div>
+    </div>
+
+    <dl class="facts reveal" style="--d: 0.2s">
+      <div><dt>{site.years}<em>+</em></dt><dd set:html={t.hero.years} /></div>
+      <div><dt><Icon name="lucide:map-pin" size={22} /></dt><dd>{site.location}</dd></div>
+    </dl>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      {words.map((w) => <span>{w}<i>✦</i></span>)}
+      {words.map((w) => <span>{w}<i>✦</i></span>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .type {
+    padding-bottom: 120px;
+  }
+  .ghost {
+    position: absolute;
+    z-index: -1;
+    right: 3vw;
+    bottom: 70px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(5rem, 12vw, 12rem);
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    text-align: right;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.11);
+    pointer-events: none;
+    user-select: none;
+  }
+  .body {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: clamp(32px, 6vw, 90px);
+    align-items: end;
+  }
+  .facts {
+    margin: 0;
+    display: grid;
+    gap: 28px;
+    text-align: right;
+  }
+  .facts dt {
+    font-family: var(--font-display);
+    font-size: 3.2rem;
+    font-weight: 600;
+    line-height: 1;
+    display: flex;
+    justify-content: flex-end;
+    color: var(--text);
+  }
+  .facts dt :global(svg) {
+    color: var(--red);
+  }
+  .facts em {
+    color: var(--red);
+    font-style: normal;
+  }
+  .facts dd {
+    margin: 6px 0 0;
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .marquee {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    border-block: 1px solid var(--line);
+    background: rgba(5, 5, 5, 0.6);
+    backdrop-filter: blur(6px);
+  }
+  .track {
+    display: flex;
+    width: max-content;
+    animation: roll 30s linear infinite;
+  }
+  .track span {
+    display: inline-flex;
+    align-items: center;
+    gap: 2.2rem;
+    padding: 1.05rem 2.2rem 1.05rem 0;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .track i {
+    font-style: normal;
+    color: var(--red);
+  }
+  @keyframes roll {
+    to { transform: translateX(-50%); }
+  }
+  @media (max-width: 860px) {
+    .body { grid-template-columns: 1fr; }
+    .facts { grid-template-columns: 1fr 1fr; text-align: left; }
+    .facts dt { justify-content: flex-start; }
+    .ghost { font-size: 28vw; bottom: 70px; }
+  }
+</style>

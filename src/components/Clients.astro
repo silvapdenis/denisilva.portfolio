@@ -1,0 +1,100 @@
+---
+import { Icon } from 'astro-icon/components';
+import { clients } from '../data/site';
+import type { Dict } from '../i18n/en';
+
+interface Props {
+  t: Dict;
+}
+const { t } = Astro.props;
+---
+
+<section class="clients" id="clients">
+  <div class="container clients__in">
+    <header class="clients__head">
+      <p class="eyebrow reveal">{t.clients.eyebrow}</p>
+      <h2 class="h2 reveal" style="--d: 0.08s" set:html={t.clients.title} />
+    </header>
+
+    <ul class="list">
+      {
+        clients.map((c, i) => (
+          <li class="reveal" style={`--d: ${(i % 2) * 0.08}s`}>
+            <a href={c.url} target="_blank" rel="noopener noreferrer">
+              <span>{c.name}</span>
+              <Icon name="lucide:arrow-up-right" size={22} />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .clients {
+    background: var(--red);
+    color: #fff;
+    padding-block: clamp(70px, 9vw, 120px);
+  }
+  .clients__in {
+    display: grid;
+    grid-template-columns: 0.7fr 1.3fr;
+    gap: clamp(32px, 6vw, 90px);
+    align-items: start;
+  }
+  .clients :global(.eyebrow) {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .clients :global(.eyebrow)::before {
+    background: #fff;
+  }
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
+  }
+  .list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+    letter-spacing: -0.02em;
+    transition: padding 0.4s var(--ease), border-color 0.3s;
+  }
+  .list a :global(svg) {
+    flex: none;
+    opacity: 0.6;
+    transition: transform 0.4s var(--ease), opacity 0.3s;
+  }
+  .list a:hover {
+    padding-left: 12px;
+    border-color: #fff;
+  }
+  .list a:hover :global(svg) {
+    opacity: 1;
+    transform: translate(4px, -4px);
+  }
+  .list a:focus-visible {
+    outline-color: #fff;
+  }
+
+  @media (max-width: 860px) {
+    .clients__in {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

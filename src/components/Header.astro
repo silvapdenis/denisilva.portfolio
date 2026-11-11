@@ -1,0 +1,216 @@
+---
+import { site } from '../data/site';
+import type { Dict } from '../i18n/en';
+
+interface Props {
+  t: Dict;
+}
+const { t } = Astro.props;
+---
+
+<header class="hdr" id="top">
+  <div class="container hdr__in">
+    <a href="#home" class="logo" aria-label={site.name}>
+      <span class="logo__mark">DS</span>
+      <span class="logo__name">denisilva</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label={t.a11y.mainNav}>
+      {t.nav.map((n) => <a href={n.href}>{n.label}</a>)}
+      <a
+        href={t.switchTo.href}
+        class="lang"
+        hreflang={t.switchTo.label.toLowerCase()}
+        lang={t.switchTo.label.toLowerCase()}
+        title={t.switchTo.full}
+        aria-label={t.switchTo.full}>{t.switchTo.label}</a
+      >
+      <a href="#contact" class="btn btn--red nav__cta">{t.cta}</a>
+    </nav>
+
+    <button class="burger" id="burger" aria-label={t.a11y.menu} aria-expanded="false" aria-controls="nav">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .hdr {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    transition: background 0.4s var(--ease), border-color 0.4s var(--ease);
+    border-bottom: 1px solid transparent;
+  }
+  .hdr.is-scrolled {
+    background: rgba(5, 5, 5, 0.78);
+    backdrop-filter: blur(14px);
+    border-bottom-color: var(--line);
+  }
+  .hdr__in {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 78px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .logo__mark {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    color: #000;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 2.2rem;
+    font-size: 0.88rem;
+  }
+  .nav a:not(.btn) {
+    color: var(--muted);
+    position: relative;
+    transition: color 0.3s;
+  }
+  .nav a:not(.btn)::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 1px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease);
+  }
+  .nav a:not(.btn):hover {
+    color: #fff;
+  }
+  .nav a:not(.btn):hover::after {
+    transform: scaleX(1);
+  }
+  .nav a.lang {
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--line);
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--text);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .nav a.lang::after {
+    display: none;
+  }
+  .nav a.lang:hover {
+    border-color: var(--red);
+    background: rgba(225, 29, 46, 0.12);
+  }
+  .nav__cta {
+    padding: 0.7rem 1.2rem;
+    margin-left: 0.5rem;
+  }
+  .burger {
+    display: none;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    position: relative;
+  }
+  .burger span {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    height: 2px;
+    background: #fff;
+    transition: transform 0.35s var(--ease), top 0.35s var(--ease);
+  }
+  .burger span:first-child {
+    top: 17px;
+  }
+  .burger span:last-child {
+    top: 26px;
+  }
+  .burger[aria-expanded='true'] span:first-child {
+    top: 21px;
+    transform: rotate(45deg);
+  }
+  .burger[aria-expanded='true'] span:last-child {
+    top: 21px;
+    transform: rotate(-45deg);
+  }
+
+  @media (max-width: 860px) {
+    .burger {
+      display: block;
+    }
+    .nav {
+      position: fixed;
+      inset: 78px 0 auto 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      padding: 12px var(--gutter) 32px;
+      background: rgba(5, 5, 5, 0.97);
+      border-bottom: 1px solid var(--line);
+      transform: translateY(-12px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, transform 0.3s var(--ease), visibility 0.3s;
+    }
+    .nav.is-open {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+    .nav a:not(.btn) {
+      width: 100%;
+      padding: 16px 0;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+    .nav a.lang {
+      width: auto;
+      margin-top: 20px;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      border: 1px solid var(--line);
+    }
+    .nav__cta {
+      margin: 24px 0 0;
+    }
+  }
+</style>
+
+<script>
+  const hdr = document.querySelector('.hdr');
+  const burger = document.getElementById('burger');
+  const nav = document.getElementById('nav');
+
+  const onScroll = () => hdr?.classList.toggle('is-scrolled', window.scrollY > 20);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const setOpen = (open: boolean) => {
+    nav?.classList.toggle('is-open', open);
+    burger?.setAttribute('aria-expanded', String(open));
+  };
+  burger?.addEventListener('click', () => setOpen(burger.getAttribute('aria-expanded') !== 'true'));
+  nav?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => e.key === 'Escape' && setOpen(false));
+</script>

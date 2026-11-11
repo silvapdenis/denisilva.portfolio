@@ -1,0 +1,41 @@
+---
+import type { Dict } from '../i18n/en';
+
+interface Props {
+  t: Dict;
+}
+const { t } = Astro.props;
+---
+
+<section class="statement" id="statement">
+  <div class="container">
+    <p class="statement__text reveal">
+      {t.statement.pre}<span class="hl">{t.statement.hl}</span>{t.statement.post}
+    </p>
+  </div>
+</section>
+
+<style>
+  .statement {
+    padding-block: clamp(70px, 10vw, 140px);
+    border-block: 1px solid var(--line);
+    background: radial-gradient(50% 120% at 50% 0%, rgba(255, 255, 255, 0.035), transparent 70%);
+  }
+  .statement__text {
+    max-width: 22em;
+    margin: 0 auto;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3.6vw, 2.9rem);
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+  }
+  .hl {
+    background: var(--red);
+    color: #fff;
+    padding: 0.04em 0.22em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+</style>

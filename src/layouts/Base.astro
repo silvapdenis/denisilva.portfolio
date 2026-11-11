@@ -1,0 +1,79 @@
+---
+import '../styles/global.css';
+import type { Dict } from '../i18n/en';
+
+interface Props {
+  t: Dict;
+  noindex?: boolean;
+}
+const { t, noindex = false } = Astro.props;
+const locale = t.lang === 'pt' ? 'pt_BR' : 'en_US';
+---
+
+<!doctype html>
+<html lang={t.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#050505" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <title>{t.title}</title>
+    <meta name="description" content={t.description} />
+    <meta property="og:title" content={t.title} />
+    <meta property="og:description" content={t.description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={locale} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      // Revela elementos ao entrar na tela
+      const els = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-in');
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('is-in'));
+      }
+
+      // Scroll suave nas âncoras (via JS, funciona mesmo com "reduzir animações" ativo no sistema)
+      document.addEventListener('click', (e) => {
+        const a = (e.target as Element).closest<HTMLAnchorElement>('a[href^="#"]');
+        if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
+        const id = decodeURIComponent(a.getAttribute('href')!.slice(1));
+        // "#top" aponta para o header (position: fixed), que não rola; vai direto ao topo da página
+        const toTop = !id || id === 'top';
+        const target = toTop ? document.body : document.getElementById(id);
+        if (!target) return;
+        e.preventDefault();
+        if (toTop) window.scrollTo({ top: 0, behavior: 'smooth' });
+        else target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.pushState(null, '', toTop ? location.pathname : `#${id}`);
+      });
+
+      // Brilho que segue o mouse nos cards
+      document.querySelectorAll<HTMLElement>('[data-glow]').forEach((card) => {
+        card.addEventListener('pointermove', (e) => {
+          const r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+          card.style.setProperty('--my', `${e.clientY - r.top}px`);
+        });
+      });
+    </script>
+  </body>
+</html>

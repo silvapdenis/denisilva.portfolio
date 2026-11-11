@@ -1,0 +1,11 @@
+---
+// Páginas de comparação: /preview/photo, /preview/code, /preview/aurora, /preview/type
+import Page from '../../components/Page.astro';
+
+export function getStaticPaths() {
+  return ['photo', 'code', 'aurora', 'type'].map((variant) => ({ params: { variant } }));
+}
+const { variant } = Astro.params;
+---
+
+<Page lang="pt" hero={variant as 'photo' | 'code' | 'aurora' | 'type'} preview />

@@ -1,0 +1,231 @@
+---
+import { Icon } from 'astro-icon/components';
+import { site } from '../data/site';
+import type { Dict } from '../i18n/en';
+
+interface Props {
+  t: Dict;
+}
+const { t } = Astro.props;
+const c = t.contact;
+---
+
+<section class="section" id="contact">
+  <div class="container grid">
+    <div class="info">
+      <p class="eyebrow reveal">{c.eyebrow}</p>
+      <h2 class="h2 reveal" style="--d: 0.08s"><Fragment set:html={c.titlePre} /><span class="hl">{c.titleHl}</span></h2>
+
+      <ul class="rows reveal" style="--d: 0.16s">
+        <li>
+          <Icon name="lucide:mail" size={20} />
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </li>
+        <li>
+          <Icon name="lucide:phone" size={20} />
+          <a href={site.whatsapp} target="_blank" rel="noopener noreferrer">{site.phone}</a>
+        </li>
+        <li>
+          <Icon name="lucide:map-pin" size={20} />
+          <span>{site.location}</span>
+        </li>
+      </ul>
+    </div>
+
+    <form
+      class="form reveal"
+      id="contact-form"
+      style="--d: 0.12s"
+      novalidate
+      data-invalid={c.invalid}
+      data-sending={c.sending}
+      data-ok={c.ok}
+      data-error={c.error}
+    >
+      <div class="row">
+        <label>
+          <span>{c.name}</span>
+          <input type="text" name="name" autocomplete="name" required />
+        </label>
+        <label>
+          <span>{c.email}</span>
+          <input type="email" name="email" autocomplete="email" required />
+        </label>
+      </div>
+      <label>
+        <span>{c.subject}</span>
+        <input type="text" name="subject" />
+      </label>
+      <label>
+        <span>{c.message}</span>
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+
+      <!-- honeypot anti-spam: humanos não veem -->
+      <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+
+      <div class="actions">
+        <button type="submit" class="btn btn--red" id="send">
+          <span>{c.send}</span>
+          <Icon name="lucide:send" size={16} />
+        </button>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(40px, 7vw, 110px);
+    align-items: start;
+  }
+  .hl {
+    color: var(--red);
+  }
+  .rows {
+    list-style: none;
+    margin: 2.6rem 0 0;
+    padding: 0;
+  }
+  .rows li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+  }
+  .rows li :global(svg) {
+    color: var(--red);
+    flex: none;
+  }
+  .rows a {
+    color: var(--text);
+    transition: color 0.3s;
+  }
+  .rows a:hover {
+    color: var(--red);
+  }
+
+  .form {
+    display: grid;
+    gap: 22px;
+    padding: clamp(24px, 3.5vw, 44px);
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+  label span {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--text);
+    font: inherit;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--red);
+    background: #000;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .btn[disabled] {
+    opacity: 0.6;
+    cursor: progress;
+  }
+  .status {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+  .status.ok {
+    color: #4ade80;
+  }
+  .status.err {
+    color: #ff6b6b;
+  }
+
+  @media (max-width: 860px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 520px) {
+    .row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('status')!;
+  const send = document.getElementById('send') as HTMLButtonElement | null;
+
+  const say = (msg: string, kind: 'ok' | 'err' | '' = '') => {
+    status.textContent = msg;
+    status.className = `status ${kind}`;
+  };
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
+
+    const msg = form.dataset as Record<string, string>;
+
+    if (!data.name?.trim() || !data.message?.trim() || !/^\S+@\S+\.\S+$/.test(data.email ?? '')) {
+      say(msg.invalid, 'err');
+      return;
+    }
+
+    send!.disabled = true;
+    say(msg.sending);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      form.reset();
+      say(msg.ok, 'ok');
+    } catch {
+      say(msg.error, 'err');
+    } finally {
+      send!.disabled = false;
+    }
+  });
+</script>

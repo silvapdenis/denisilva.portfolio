@@ -1,0 +1,126 @@
+---
+import type { Dict } from '../i18n/en';
+
+interface Props {
+  t: Dict;
+}
+const { t } = Astro.props;
+const s = t.skills;
+---
+
+<section class="skills" id="skills">
+  <div class="container">
+    <header class="head">
+      <p class="eyebrow reveal">{s.eyebrow}</p>
+      <h2 class="h2 reveal" style="--d: 0.08s">{s.title}</h2>
+    </header>
+
+    <div class="groups">
+      {
+        s.groups.map((g, i) => (
+          <div class="group reveal" style={`--d: ${(i % 3) * 0.07}s`}>
+            <h3>{g.name}</h3>
+            <ul>
+              {g.items.map((it) => <li>{it}</li>)}
+            </ul>
+          </div>
+        ))
+      }
+
+      <div class="group langs reveal" style="--d: 0.14s">
+        <h3>{s.languagesTitle}</h3>
+        <dl>
+          {
+            s.languages.map((l) => (
+              <div>
+                <dt>{l.name}</dt>
+                <dd>{l.level}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills {
+    padding-block: clamp(70px, 9vw, 120px);
+    border-top: 1px solid var(--line);
+    background: radial-gradient(60% 100% at 50% 0%, rgba(255, 255, 255, 0.03), transparent 70%);
+  }
+  .head {
+    margin-bottom: clamp(32px, 4vw, 52px);
+  }
+  .groups {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .group {
+    padding: 26px 28px 30px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    transition: border-color 0.4s var(--ease), transform 0.4s var(--ease);
+  }
+  .group:hover {
+    border-color: rgba(225, 29, 46, 0.55);
+    transform: translateY(-3px);
+  }
+  h3 {
+    margin: 0 0 1.2rem;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  li {
+    padding: 0.4rem 0.85rem;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    font-size: 0.88rem;
+  }
+  dl {
+    margin: 0;
+    display: grid;
+    gap: 12px;
+  }
+  dl div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  dl div:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+  dt {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+  }
+  dd {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+  @media (max-width: 980px) {
+    .groups { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .groups { grid-template-columns: 1fr; }
+  }
+</style>

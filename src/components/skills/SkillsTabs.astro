@@ -1,0 +1,202 @@
+---
+// Variante 2: abas por categoria, tecnologias grandes no painel
+import type { Dict } from '../../i18n/en';
+
+interface Props {
+  t: Dict;
+}
+const { t } = Astro.props;
+const s = t.skills;
+---
+
+<section class="skills" id="skills">
+  <div class="container">
+    <header class="head">
+      <p class="eyebrow reveal">{s.eyebrow}</p>
+      <h2 class="h2 reveal" style="--d: 0.08s">{s.title}</h2>
+    </header>
+
+    <div class="tabs reveal" data-tabs>
+      <div class="tablist" role="tablist" aria-label={s.title}>
+        {
+          s.groups.map((g, i) => (
+            <button
+              type="button"
+              role="tab"
+              id={`tab-${i}`}
+              aria-controls={`panel-${i}`}
+              aria-selected={i === 0 ? 'true' : 'false'}
+              tabindex={i === 0 ? 0 : -1}
+            >
+              <span>{g.name}</span>
+              <small>{String(g.items.length).padStart(2, '0')}</small>
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="panels">
+        {
+          s.groups.map((g, i) => (
+            <div class="panel" role="tabpanel" id={`panel-${i}`} aria-labelledby={`tab-${i}`}>
+              <ul>
+                {g.items.map((it, k) => <li style={`--k:${k}`}>{it}</li>)}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="langs reveal">
+      <span>{s.languagesTitle}</span>
+      {s.languages.map((l) => <b>{l.name} <em>{l.level}</em></b>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills {
+    padding-block: clamp(70px, 9vw, 120px);
+    border-top: 1px solid var(--line);
+  }
+  .head {
+    margin-bottom: clamp(32px, 4vw, 52px);
+  }
+  .tablist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .tablist button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.85rem 1.3rem;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    font: inherit;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.3s, border-color 0.3s, background 0.3s;
+  }
+  .tablist button small {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+  }
+  .tablist button:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+  .tablist button[aria-selected='true'] {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff;
+  }
+  .panels {
+    min-height: 230px;
+    padding: clamp(28px, 4vw, 52px);
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  .panel + .panel {
+    margin-top: 24px;
+  }
+  /* Com JS: só o painel ativo aparece */
+  :global(.js) .panel[hidden] {
+    display: none;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 30px;
+  }
+  li {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2rem, 4.6vw, 3.6rem);
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    animation: in 0.6s var(--ease) both;
+    animation-delay: calc(var(--k) * 0.06s);
+    transition: color 0.3s;
+  }
+  li:hover {
+    color: var(--red);
+  }
+  @keyframes in {
+    from { opacity: 0; transform: translateY(14px); }
+  }
+
+  .langs {
+    margin-top: clamp(32px, 4vw, 52px);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    font-size: 0.95rem;
+  }
+  .langs span {
+    font-size: 0.74rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+  .langs b {
+    font-family: var(--font-display);
+    font-weight: 500;
+  }
+  .langs em {
+    margin-left: 6px;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: var(--muted);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root) => {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role=tab]')];
+    const panels = [...root.querySelectorAll<HTMLElement>('[role=tabpanel]')];
+
+    const select = (i: number, focus = false) => {
+      tabs.forEach((tab, k) => {
+        const on = k === i;
+        tab.setAttribute('aria-selected', String(on));
+        tab.tabIndex = on ? 0 : -1;
+        if (on && focus) tab.focus();
+      });
+      panels.forEach((p, k) => {
+        p.hidden = k !== i;
+        if (k === i) {
+          // reinicia a animação de entrada das tecnologias
+          p.querySelectorAll<HTMLElement>('li').forEach((li) => {
+            li.style.animation = 'none';
+            void li.offsetWidth;
+            li.style.animation = '';
+          });
+        }
+      });
+    };
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => select(i));
+      tab.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') select((i + 1) % tabs.length, true);
+        if (e.key === 'ArrowLeft') select((i - 1 + tabs.length) % tabs.length, true);
+      });
+    });
+    select(0);
+  });
+</script>

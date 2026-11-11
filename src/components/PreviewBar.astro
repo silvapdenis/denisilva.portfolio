@@ -1,0 +1,89 @@
+---
+// Barra fixa só nas páginas de comparação (/preview/*). Escondida por padrão:
+// para mostrar, adicione ?bar ao endereço. Não aparece no site real.
+interface Props {
+  group: 'hero' | 'skills';
+  current: string;
+}
+const { group, current } = Astro.props;
+
+const groups = {
+  hero: {
+    label: 'Hero',
+    href: (id: string) => `/preview/${id}/?bar`,
+    items: [
+      ['photo', '1 · Foto'],
+      ['code', '2 · Código'],
+      ['aurora', '3 · Aurora ★'],
+      ['type', '4 · Tipográfico'],
+    ],
+  },
+  skills: {
+    label: 'Tecnologias',
+    href: (id: string) => `/preview/skills/${id}/?bar#skills`,
+    items: [
+      ['cards', '0 · Cards'],
+      ['marquee', '1 · Faixa rolando'],
+      ['tabs', '2 · Abas'],
+      ['list', '3 · Lista ★'],
+    ],
+  },
+};
+const g = groups[group];
+---
+
+<nav class="pv" aria-label={g.label}>
+  <span>{g.label}</span>
+  {g.items.map(([id, label]) => <a href={g.href(id)} class:list={[{ on: id === current }]}>{label}</a>)}
+</nav>
+
+<script>
+  if (new URLSearchParams(location.search).has('bar')) {
+    document.querySelector<HTMLElement>('.pv')?.classList.add('show');
+  }
+</script>
+
+<style>
+  .pv {
+    position: fixed;
+    z-index: 100;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    display: none;
+    align-items: center;
+    gap: 4px;
+    max-width: calc(100vw - 24px);
+    overflow-x: auto;
+    padding: 6px;
+    background: rgba(20, 20, 22, 0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  }
+  .pv.show {
+    display: flex;
+  }
+  span {
+    padding: 0 12px 0 14px;
+    color: var(--muted);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.68rem;
+  }
+  a {
+    padding: 8px 14px;
+    border-radius: 999px;
+    white-space: nowrap;
+    color: #fff;
+    transition: background 0.25s;
+  }
+  a:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  a.on {
+    background: var(--red);
+  }
+</style>

@@ -1,0 +1,56 @@
+---
+// Página completa; recebe o idioma e é usada por /index.astro (pt) e /en/index.astro (en).
+// `hero` escolhe a variante do hero; `preview` mostra a barra de comparação.
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import HeroCode from './heroes/HeroCode.astro';
+import HeroAurora from './heroes/HeroAurora.astro';
+import HeroType from './heroes/HeroType.astro';
+import PreviewBar from './PreviewBar.astro';
+import Statement from './Statement.astro';
+import Services from './Services.astro';
+import Skills from './Skills.astro';
+import SkillsMarquee from './skills/SkillsMarquee.astro';
+import SkillsTabs from './skills/SkillsTabs.astro';
+import SkillsList from './skills/SkillsList.astro';
+import Resume from './Resume.astro';
+import Clients from './Clients.astro';
+import Contact from './Contact.astro';
+import Footer from './Footer.astro';
+import { getT, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  hero?: 'photo' | 'code' | 'aurora' | 'type';
+  skills?: 'cards' | 'marquee' | 'tabs' | 'list';
+  preview?: boolean;
+}
+// Hero padrão do site: 'aurora'. Seção de tecnologias padrão: 'list'.
+// As outras variantes continuam disponíveis em /preview/*.
+const { lang, hero = 'aurora', skills = 'list', preview = false } = Astro.props;
+const t = getT(lang);
+// Frase de impacto (segunda seção) oculta por enquanto. Mude para true para exibir novamente.
+const showStatement = false;
+---
+
+<Base t={t} noindex={preview}>
+  <Header t={t} />
+  <main>
+    {hero === 'photo' && <Hero t={t} />}
+    {hero === 'code' && <HeroCode t={t} />}
+    {hero === 'aurora' && <HeroAurora t={t} />}
+    {hero === 'type' && <HeroType t={t} />}
+    {showStatement && <Statement t={t} />}
+    <Services t={t} />
+    {skills === 'cards' && <Skills t={t} />}
+    {skills === 'marquee' && <SkillsMarquee t={t} />}
+    {skills === 'tabs' && <SkillsTabs t={t} />}
+    {skills === 'list' && <SkillsList t={t} />}
+    <Resume t={t} />
+    <Clients t={t} />
+    <Contact t={t} />
+  </main>
+  <Footer t={t} />
+  {preview && <PreviewBar group={skills === 'list' ? 'hero' : 'skills'} current={skills === 'list' ? hero : skills} />}
+</Base>

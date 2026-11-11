@@ -1,0 +1,179 @@
+import type { Dict } from './en';
+
+export const pt: Dict = {
+  lang: 'pt',
+  htmlLang: 'pt-BR',
+  title: 'Denis Silva — Desenvolvedor Full Stack Sênior',
+  description:
+    'Desenvolvedor Full Stack Sênior e Tech Lead com mais de 13 anos de experiência. PHP, Laravel, Vue.js e AWS — de e-commerces a plataformas SaaS escaláveis. Disponível para trabalho remoto.',
+  switchTo: { label: 'EN', full: 'English', href: '/en/' },
+  nav: [
+    { label: 'Início', href: '#home' },
+    { label: 'Serviços', href: '#services' },
+    { label: 'Currículo', href: '#resume' },
+    { label: 'Clientes', href: '#clients' },
+    { label: 'Contato', href: '#contact' },
+  ],
+  cta: 'Vamos conversar',
+  hero: {
+    badge: 'Disponível para trabalho remoto',
+    eyebrow: 'Olá, eu sou o Denis Silva',
+    titlePre: 'Software bem feito, ',
+    titleHl: 'sem complicação.',
+    intro:
+      'Sou desenvolvedor Full Stack e há mais de 13 anos ajudo empresas a tirar projetos do papel — de lojas virtuais a plataformas na nuvem. Trabalho com PHP, Laravel e Vue.js, com atenção aos detalhes e conversa franca do começo ao fim.',
+    secondary: 'O que eu faço',
+    years: 'anos de<br />experiência',
+  },
+  statement: {
+    pre: 'Todo projeto começa com uma boa pergunta: ',
+    hl: 'o que realmente precisa funcionar?',
+    post: '',
+  },
+  services: {
+    eyebrow: 'Meus serviços',
+    title: 'O que eu faço',
+    items: [
+      {
+        icon: 'lucide:layout-dashboard',
+        title: 'SaaS e Sistemas Sob Medida',
+        text: 'Arquitetura e entrega de plataformas completas com Laravel e Vue.js — de reservas e faturamento automatizado à gestão de operações.',
+      },
+      {
+        icon: 'lucide:shopping-cart',
+        title: 'E-commerce',
+        text: 'Lojas em Magento, VTEX e WooCommerce, com configuração de pagamentos, regras de negócio e foco em performance e conversão.',
+      },
+      {
+        icon: 'lucide:globe',
+        title: 'WordPress e SEO',
+        text: 'Sites institucionais e personalizados em WordPress, rápidos, pensados para SEO e fáceis de manter no dia a dia.',
+      },
+      {
+        icon: 'lucide:plug',
+        title: 'APIs e Integrações',
+        text: 'APIs REST e integrações bidirecionais em tempo real com ERPs como o TOTVS Protheus e serviços externos.',
+      },
+      {
+        icon: 'lucide:cloud',
+        title: 'Infraestrutura em Nuvem',
+        text: 'AWS (EC2, S3), filas assíncronas com SQS e processos em background gerenciados com Supervisor.',
+      },
+      {
+        icon: 'lucide:users',
+        title: 'Liderança Técnica',
+        text: 'Liderança de times, condução de sprints, gestão de débito técnico e criação de processos de QA com testes regressivos.',
+      },
+    ],
+  },
+  skills: {
+    eyebrow: 'Tecnologias',
+    title: 'Minha stack',
+    groups: [
+      { name: 'Back-end', items: ['PHP', 'Laravel', 'Node.js', 'APIs REST', 'SQS'] },
+      { name: 'Front-end', items: ['Vue.js', 'JavaScript', 'HTML5', 'CSS3', 'SASS', 'Angular'] },
+      { name: 'Cloud e Infra', items: ['AWS', 'EC2', 'S3', 'Supervisor'] },
+      { name: 'CMS e E-commerce', items: ['WordPress', 'WooCommerce', 'VTEX', 'Magento'] },
+      { name: 'Banco de dados', items: ['MySQL', 'ERP TOTVS'] },
+    ],
+    languagesTitle: 'Idiomas',
+    languages: [
+      { name: 'Português', level: 'Nativo' },
+      { name: 'Inglês', level: 'Intermediário' },
+    ],
+  },
+  resume: {
+    eyebrow: 'anos de experiência',
+    title: 'Meu currículo',
+    experienceTitle: 'Experiência',
+    stackLabel: 'Stack',
+    jobs: [
+      {
+        role: 'Full Stack Sênior & Tech Lead',
+        company: 'AVANTTO',
+        place: 'São Paulo (remoto)',
+        period: 'Ago 2021 — Presente',
+        metrics: [],
+        bullets: [
+          'Tech Lead no desenvolvimento de plataforma SaaS proprietária para aviação executiva — arquitetura e entrega de módulos de reservas, faturamento automatizado, tripulação, frota e providências operacionais.',
+          'Integração bidirecional com o ERP Protheus (TOTVS), garantindo sincronização de dados críticos de negócio em tempo real.',
+          'Faturamento automatizado para múltiplos modelos contratuais.',
+          'Processo formal de QA com suíte de testes regressivos, aumentando a estabilidade das entregas.',
+          'Infraestrutura na AWS com filas assíncronas via SQS e processos em background controlados pelo Supervisor.',
+        ],
+        stack: ['PHP', 'Laravel', 'Vue.js', 'AWS', 'SQS', 'MySQL', 'ERP TOTVS'],
+      },
+      {
+        role: 'Programador Front-End',
+        company: 'TATIX',
+        place: 'São Paulo',
+        period: 'Dez 2020 — Ago 2021',
+        metrics: [],
+        bullets: [
+          'Front-end de e-commerces Magento para clientes de médio e grande porte, com foco em performance, responsividade e aderência às diretrizes de UX/UI.',
+          'Customização avançada de temas e templates com SASS/LESS, garantindo compatibilidade entre navegadores em lojas de alta demanda.',
+        ],
+        stack: ['Magento', 'HTML', 'CSS', 'LESS/SASS', 'JavaScript', 'jQuery'],
+      },
+      {
+        role: 'Programador Full Stack',
+        company: 'AGÊNCIA ILI',
+        place: 'São Paulo',
+        period: 'Mai 2019 — Dez 2020',
+        metrics: [],
+        bullets: [
+          'Sites institucionais e e-commerces customizados em WordPress/WooCommerce, com foco em performance, SEO e facilidade de manutenção.',
+          'Implementação de lojas VTEX com configuração de meios de pagamento, regras de negócio e integrações com APIs externas.',
+        ],
+        stack: ['PHP', 'WordPress', 'WooCommerce', 'VTEX', 'JavaScript'],
+      },
+      {
+        role: 'Programador Full Stack',
+        company: 'INPE / CPTEC',
+        place: 'Cachoeira Paulista',
+        period: 'Jan 2009 — Jan 2019',
+        metrics: [],
+        bullets: [
+          'Desenvolvimento de sistemas e plataformas web para o Instituto Nacional de Pesquisas Espaciais, em projetos de grande relevância científica e social.',
+          'Criação do SOS-Chuva — sistema premiado de observação meteorológica em tempo real, integrando satélites, radares e simulações numéricas para cidadãos e Defesa Civil.',
+        ],
+        stack: ['PHP', 'WordPress', 'WooCommerce', 'VTEX', 'JavaScript'],
+      },
+    ],
+    educationTitle: 'Formação',
+    degree: {
+      title: 'Tecnólogo em Gestão de Tecnologia da Informação',
+      place: 'FATEC Guaratinguetá',
+      note: 'Concluído em 2017',
+    },
+    awardTitle: 'Premiação',
+    award: {
+      title: 'Prêmio Péter Murányi',
+      year: '2009',
+      text: 'Reconhecimento pelo desenvolvimento do SOS-Chuva, sistema de previsão meteorológica em tempo real que integra dados de satélite, radares e simulações numéricas — funcionando como um Waze meteorológico para cidadãos, Defesa Civil e governos municipais.',
+    },
+  },
+  clients: {
+    eyebrow: 'Melhores clientes',
+    title: 'Clientes<br />selecionados',
+  },
+  contact: {
+    eyebrow: 'Contato',
+    titlePre: 'Vamos construir<br />algo ',
+    titleHl: 'incrível.',
+    name: 'Nome',
+    email: 'E-mail',
+    subject: 'Assunto',
+    message: 'Mensagem',
+    send: 'Enviar mensagem',
+    invalid: 'Preencha seu nome, um e-mail válido e a mensagem.',
+    sending: 'Enviando…',
+    ok: 'Obrigado! Sua mensagem foi enviada. Responderei em breve.',
+    error: 'Não foi possível enviar agora. Por favor, me escreva diretamente por e-mail.',
+  },
+  footer: {
+    rights: 'Todos os direitos reservados.',
+    top: 'Voltar ao topo',
+  },
+  a11y: { menu: 'Abrir menu', mainNav: 'Principal', portrait: 'Retrato de Denis Silva', stack: 'Principais tecnologias' },
+};

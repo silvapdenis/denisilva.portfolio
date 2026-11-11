@@ -1,0 +1,154 @@
+---
+// Variante: janela de editor "digitando" o perfil
+import { Icon } from 'astro-icon/components';
+import { site, stack } from '../../data/site';
+import type { Dict } from '../../i18n/en';
+
+interface Props {
+  t: Dict;
+}
+const { t } = Astro.props;
+const pt = t.lang === 'pt';
+const role = pt ? 'Desenvolvedor Full Stack Sênior' : 'Senior Full Stack Developer';
+const lines = [
+  { k: 'const', rest: [['v', ' denis'], ['p', ' = {']] },
+  { rest: [['p', '  '], ['k2', 'role'], ['p', ': '], ['s', `"${role}"`], ['p', ',']] },
+  { rest: [['p', '  '], ['k2', pt ? 'experiencia' : 'experience'], ['p', ': '], ['s', `"${site.years}+ ${pt ? 'anos' : 'years'}"`], ['p', ',']] },
+  { rest: [['p', '  '], ['k2', 'stack'], ['p', ': ['], ['s', stack.slice(1).map((s) => `"${s}"`).join(', ')], ['p', '],']] },
+  { rest: [['p', '  '], ['k2', pt ? 'local' : 'location'], ['p', ': '], ['s', '"São Paulo, BR"'], ['p', ',']] },
+  { rest: [['p', '  '], ['k2', pt ? 'disponivel' : 'available'], ['p', ': '], ['b', 'true'], ['p', ',']] },
+  { rest: [['p', '};']] },
+];
+---
+
+<section class="hx-hero" id="home">
+  <div class="hx-grid" aria-hidden="true"></div>
+  <div class="glow" aria-hidden="true"></div>
+
+  <div class="container grid">
+    <div>
+      <p class="eyebrow reveal">{t.hero.eyebrow}</p>
+      <h1 class="hx-title reveal" style="--d: 0.08s">{t.hero.titlePre}<span class="hx-hl">{t.hero.titleHl}</span></h1>
+      <p class="hx-text reveal" style="--d: 0.16s">{t.hero.intro}</p>
+      <div class="hx-cta reveal" style="--d: 0.24s">
+        <a href="#contact" class="btn btn--red">{t.cta} <Icon name="lucide:arrow-up-right" size={16} /></a>
+        <a href="#services" class="btn">{t.hero.secondary}</a>
+      </div>
+    </div>
+
+    <div class="win reveal" style="--d: 0.2s" aria-hidden="true">
+      <div class="win__bar">
+        <i></i><i></i><i></i>
+        <span>denis.ts</span>
+      </div>
+      <div class="win__code">{
+        lines.map((l, i) => (
+          <span class="ln" style={`--i:${i}`}>
+            <span class="no">{i + 1}</span>
+            {l.k && <span class="k">{l.k}</span>}
+            {l.rest.map(([c, txt]) => <span class={c}>{txt}</span>)}
+            {i === lines.length - 1 && <span class="caret"></span>}
+          </span>
+        ))
+      }</div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .glow {
+    position: absolute;
+    z-index: -1;
+    right: -10%;
+    top: 15%;
+    width: 55%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(225, 29, 46, 0.35), transparent 65%);
+    filter: blur(50px);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: center;
+  }
+  .win {
+    background: rgba(13, 13, 14, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--line);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(225, 29, 46, 0.08);
+  }
+  .win__bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .win__bar i {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.14);
+  }
+  .win__bar i:first-child {
+    background: var(--red);
+  }
+  .win__bar span {
+    margin-left: 10px;
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  }
+  .win__code {
+    margin: 0;
+    padding: 22px 22px 26px 0;
+    font: 0.92rem/1.9 ui-monospace, 'Cascadia Code', Consolas, monospace;
+    overflow-x: auto;
+  }
+  .ln {
+    display: flex;
+    align-items: baseline;
+    overflow: hidden;
+    animation: type 0.7s steps(34) both;
+    animation-delay: calc(0.5s + var(--i) * 0.55s);
+  }
+  .ln span {
+    white-space: pre;
+  }
+  .no {
+    display: inline-block;
+    flex: none;
+    width: 3.2ch;
+    margin-right: 1.4ch;
+    text-align: right;
+    color: rgba(255, 255, 255, 0.22);
+    user-select: none;
+  }
+  .k { color: #ff5c6a; }
+  .v { color: #fff; }
+  .k2 { color: #9ec1ff; }
+  .s { color: #ffb86b; }
+  .b { color: #7be0a0; }
+  .p { color: var(--muted); }
+  .caret {
+    display: inline-block;
+    width: 8px;
+    height: 1.1em;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    background: var(--red);
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes type {
+    from { max-width: 0; }
+    to { max-width: 100%; }
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
