@@ -27,6 +27,15 @@ const locale = t.lang === 'pt' ? 'pt_BR' : 'en_US';
     <script is:inline>
       document.documentElement.classList.add('js');
     </script>
+    {
+      import.meta.env.PROD && (
+        <>
+          {/* Vercel Web Analytics (sem cookies). Ative em Vercel → projeto → Analytics → Enable. */}
+          <script is:inline>{`window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };`}</script>
+          <script is:inline defer src="/_vercel/insights/script.js" />
+        </>
+      )
+    }
   </head>
   <body>
     <slot />
