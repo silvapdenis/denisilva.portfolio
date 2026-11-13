@@ -5,7 +5,7 @@ export const pt: Dict = {
   htmlLang: 'pt-BR',
   title: 'Denis Silva — Desenvolvedor Full Stack Sênior',
   description:
-    'Desenvolvedor Full Stack Sênior e Tech Lead com mais de 13 anos de experiência. PHP, Laravel, Vue.js e AWS — de e-commerces a plataformas SaaS escaláveis. Disponível para trabalho remoto.',
+    'Desenvolvedor Full Stack Sênior e Tech Lead com mais de 13 anos de experiência. PHP, Laravel, Vue.js e AWS — de e-commerces a plataformas SaaS escaláveis. Disponível para trabalho remoto, híbrido e presencial (São Paulo e São José dos Campos).',
   switchTo: { label: 'EN', full: 'English', href: '/en/' },
   nav: [
     { label: 'Início', href: '#home' },
@@ -16,7 +16,7 @@ export const pt: Dict = {
   ],
   cta: 'Vamos conversar',
   hero: {
-    badge: 'Disponível para trabalho remoto',
+    badge: 'Disponível para remoto, híbrido e presencial',
     eyebrow: 'Olá, eu sou o Denis Silva',
     titlePre: 'Software bem feito, ',
     titleHl: 'sem complicação.',
@@ -93,7 +93,7 @@ export const pt: Dict = {
         role: 'Full Stack Sênior & Tech Lead',
         company: 'AVANTTO',
         place: 'São Paulo (remoto)',
-        period: 'Ago 2021 — Presente',
+        period: 'Ago 2021 — Nov 2026',
         metrics: [],
         bullets: [
           'Tech Lead no desenvolvimento de plataforma SaaS proprietária para aviação executiva.',
@@ -172,6 +172,27 @@ export const pt: Dict = {
     sending: 'Enviando…',
     ok: 'Obrigado! Sua mensagem foi enviada. Responderei em breve.',
     error: 'Não foi possível enviar agora. Por favor, me escreva diretamente por e-mail.',
+  },
+  cv: {
+    role: 'Desenvolvedor Full Stack Sênior',
+    highlights: 'PHP · Laravel · Vue.js · AWS',
+    availability: 'Disponível para remoto, híbrido e presencial',
+    availabilityPlaces: 'São Paulo e São José dos Campos',
+    profileTitle: 'Perfil',
+    profile:
+      'Desenvolvedor Full Stack Sênior com mais de 13 anos de experiência, especializado em PHP/Laravel e Vue.js. Conduzi projetos de diferentes portes — de lojas virtuais a plataformas SaaS escaláveis na nuvem. Atuei como Tech Lead, liderando times e estabelecendo processos de QA, e uso IA no dia a dia para entregar mais rápido, sem abrir mão da qualidade.',
+    contactTitle: 'Contato',
+    differentialsTitle: 'Diferenciais',
+    differentials: [
+      'Liderança técnica de times',
+      'Visão orientada a produto e negócio',
+      'Comunicação clara com stakeholders',
+      'QA mindset e qualidade de entrega',
+      'Gestão de sprints e débito técnico',
+      'Comprometimento com prazos',
+    ],
+    print: 'Salvar como PDF',
+    otherLabel: 'English version',
   },
   footer: {
     rights: 'Todos os direitos reservados.',

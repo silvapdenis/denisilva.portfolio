@@ -2,11 +2,13 @@
 
 export const site = {
   name: 'Denis Silva',
+  fullName: 'Denis Pereira e Silva', // usado no currículo (/curriculo e /en/resume)
+  url: 'https://denisilvaportfolio.vercel.app', // endereço do portfólio (troque se tiver domínio próprio)
   years: 13,
   email: 'silvapdenis@gmail.com',
   phone: '+55 (12) 98270-9753',
   whatsapp: 'https://wa.me/5512982709753',
-  location: 'Taubaté, São Paulo',
+  location: 'São Paulo, SP',
   linkedin: 'https://www.linkedin.com/in/d%C3%AAnis-silva-6a847424/',
   github: 'https://github.com/silvapdenis',
 };
@@ -21,4 +23,7 @@ export const clients = [
   { name: 'Tatix', url: 'https://tatix.com.br/' },
   { name: 'Aid Collective', url: 'http://www.aidcollective.com/' },
   { name: 'Tuia', url: 'https://tuiaseguros.com.br/' },
+  { name: 'Weather Service', url: 'https://weatherservice.com.br/expocacer/' },
+  { name: 'Aurinova', url: 'https://aurinova.com.br/' },
+  { name: 'Starday', url: 'https://app.starday.com.br/' },
 ];

@@ -4,7 +4,7 @@ export const en = {
   htmlLang: 'en',
   title: 'Denis Silva — Senior Full Stack Developer',
   description:
-    'Senior Full Stack Developer and Tech Lead with 13+ years of experience. PHP, Laravel, Vue.js and AWS — from e-commerce to scalable SaaS platforms. Available for remote work.',
+    'Senior Full Stack Developer and Tech Lead with 13+ years of experience. PHP, Laravel, Vue.js and AWS — from e-commerce to scalable SaaS platforms. Available for remote, hybrid and on-site work (São Paulo and São José dos Campos).',
   switchTo: { label: 'PT', full: 'Português', href: '/' },
   nav: [
     { label: 'Home', href: '#home' },
@@ -15,7 +15,7 @@ export const en = {
   ],
   cta: "Let's talk",
   hero: {
-    badge: 'Available for remote work',
+    badge: 'Available for remote, hybrid and on-site work',
     eyebrow: "Hello, I'm Denis Silva",
     titlePre: 'Well-built software, ',
     titleHl: 'without the complication.',
@@ -92,7 +92,7 @@ export const en = {
         role: 'Senior Full Stack Developer & Tech Lead',
         company: 'AVANTTO',
         place: 'São Paulo (remote)',
-        period: 'Aug 2021 — Present',
+        period: 'Aug 2021 — Nov 2026',
         metrics: [],
         bullets: [
           'Tech Lead on a proprietary SaaS platform for executive aviation.',
@@ -171,6 +171,27 @@ export const en = {
     sending: 'Sending…',
     ok: 'Thanks! Your message was sent. I’ll get back to you soon.',
     error: 'Could not send right now. Please e-mail me directly.',
+  },
+  cv: {
+    role: 'Senior Full Stack Developer',
+    highlights: 'PHP · Laravel · Vue.js · AWS',
+    availability: 'Available for remote, hybrid and on-site work',
+    availabilityPlaces: 'São Paulo and São José dos Campos',
+    profileTitle: 'Profile',
+    profile:
+      'Senior Full Stack Developer with 13+ years of experience, specialized in PHP/Laravel and Vue.js. I have led projects of all sizes — from online stores to scalable cloud SaaS platforms. As a Tech Lead I led teams and set up QA processes, and I use AI every day to deliver faster without compromising quality.',
+    contactTitle: 'Contact',
+    differentialsTitle: 'Strengths',
+    differentials: [
+      'Technical team leadership',
+      'Product and business mindset',
+      'Clear communication with stakeholders',
+      'QA mindset and delivery quality',
+      'Sprint and technical debt management',
+      'Commitment to deadlines',
+    ],
+    print: 'Save as PDF',
+    otherLabel: 'Versão em português',
   },
   footer: {
     rights: 'All rights reserved.',
